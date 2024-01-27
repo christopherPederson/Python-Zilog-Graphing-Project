@@ -16,8 +16,8 @@ lastMotionEvent = time.time()
 
 currentMotionEvent = 0
 
-#setting experiment time limit currently set to 1 minute
-timeLimit = lastMotionEvent + 60
+#setting experiment time limit
+timeLimit = lastMotionEvent + 600
 
 while time.time() < timeLimit:
     data = serialData.readline()
@@ -28,10 +28,12 @@ while time.time() < timeLimit:
 
         if "Motion Detected" in data:
             currentMotionEvent = time.time()
+            print("Event detected", currentMotionEvent)
             motionEventSeperationAry.append(currentMotionEvent - lastMotionEvent)
             motionEventAry.append(currentMotionEvent)
             lastMotionEvent = currentMotionEvent
 
 # plot and display data
+print(motionEventAry)
 plt.plot(motionEventSeperationAry)
 plt.show()
